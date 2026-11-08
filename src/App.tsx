@@ -48,16 +48,19 @@ function MiniTimer() {
   );
 }
 
-function ScrollGuide({ direction, step, pulse }: { direction: "up" | "down"; step: number; pulse: number }) {
+function ScrollGuide({ direction, step }: { direction: "up" | "down"; step: number }) {
   const guide = guideSteps[step];
+  const character = direction === "up"
+    ? { src: "./assets/hansooni.jpg", alt: "한순이 안내 캐릭터" }
+    : { src: "./assets/handori.jpg", alt: "한돌이 안내 캐릭터" };
   return (
     <aside className={`scroll-guide is-${direction}`} aria-label="페이지 이동 캐릭터 안내">
-      <div className="scroll-guide-bubble" key={`bubble-${pulse}`}>
+      <div className="scroll-guide-bubble" key={`${direction}-${step}`}>
         <span>{guide.label} · SCROLL GUIDE</span>
         <strong>{direction === "up" ? guide.up : guide.down}</strong>
         <small>{direction === "up" ? "↑ 위로 이동 중" : "↓ 아래로 이동 중"}</small>
       </div>
-      <img key={`avatar-${pulse}`} className="scroll-guide-avatar" src="./assets/hansooni.jpg" alt="한순이 안내 캐릭터" />
+      <img key={direction} className="scroll-guide-avatar" src={character.src} alt={character.alt} />
     </aside>
   );
 }
@@ -67,7 +70,7 @@ function App() {
   const [topic, setTopic] = useState("");
   const [helpOpen, setHelpOpen] = useState(false);
   const [openOptional, setOpenOptional] = useState<string | null>(null);
-  const [scrollGuide, setScrollGuide] = useState({ direction: "down" as "up" | "down", step: 0, pulse: 0 });
+  const [scrollGuide, setScrollGuide] = useState({ direction: "down" as "up" | "down", step: 0 });
   const safeTopic = topic.trim() || defaultTopic;
   const completedCount = requiredLessons.filter((lesson) => completed[lesson.id]).length;
   const progressPercent = Math.round((completedCount / requiredLessons.length) * 100);
@@ -89,7 +92,7 @@ function App() {
           const step = Math.min(guideSteps.length - 1, Math.floor((currentY / maxScroll) * guideSteps.length));
           const now = window.performance.now();
           if (now - lastPulse > 110) {
-            setScrollGuide({ direction, step, pulse: now });
+            setScrollGuide({ direction, step });
             lastPulse = now;
           }
         }
@@ -176,7 +179,7 @@ function App() {
       </main>
 
       <footer className="site-footer"><div className="footer-inner"><div><img className="footer-logo" src="./assets/hycu-kor-wordmark.png" alt="한양사이버대학교" /><p>HYCU 부동산학과를 위한 독립형 교육용 페이지입니다.<br />학교 공식 홈페이지·SSO·행사 페이지를 대신하지 않습니다.</p></div><div className="footer-links"><span>참고한 공개 페이지</span><a href="https://www.hycu.ac.kr/user/index.do" target="_blank" rel="noreferrer">한양사이버대학교 홈페이지 ↗</a><a href="https://www.hycu.ac.kr/user/comm/html/www_UI_12.do" target="_blank" rel="noreferrer">대학 UI 규정 ↗</a><a href="https://vibecoding-class-2-1108.vercel.app/" target="_blank" rel="noreferrer">공개 강의 구조 참고 ↗</a></div><div className="footer-note"><img src="./assets/hansooni.jpg" alt="한순이" /><div><span>LOCAL-FIRST</span><p>입력한 앱 주제와 진행상태는<br />이 브라우저에만 저장됩니다.</p></div></div></div><div className="footer-bottom"><span>© 2026 HYCU 부동산학과 AI활용한 현장적용실무특강</span><span>made for learning · no official endorsement</span></div></footer>
-      <ScrollGuide direction={scrollGuide.direction} step={scrollGuide.step} pulse={scrollGuide.pulse} />
+      <ScrollGuide direction={scrollGuide.direction} step={scrollGuide.step} />
       <button type="button" className="help-fab" onClick={() => setHelpOpen(true)} aria-label="막힌 곳 도움말 열기"><span aria-hidden="true">?</span><strong>막혔어요</strong></button>
       <HelpModal open={helpOpen} onClose={() => setHelpOpen(false)} />
     </div>
