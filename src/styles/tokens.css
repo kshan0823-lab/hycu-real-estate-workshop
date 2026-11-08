@@ -1,0 +1,20 @@
+:root {
+  /* HYCU UI 규정에서 확인한 전용 컬러: RGB 0,157,232 / 255,169,82 / 221,221,221 */
+  --hycu-blue: #009de8;
+  --hycu-orange: #ffa952;
+  --hycu-gray: #dddddd;
+  /* 아래 색상은 이번 독립형 특강 페이지를 위한 별도 디자인 토큰입니다. */
+  --ink: #132b3c;
+  --ink-soft: #486174;
+  --paper: #f6f9fa;
+  --white: #ffffff;
+  --line: #d8e2e8;
+  --blue-soft: #e7f6fc;
+  --orange-soft: #fff1df;
+  --navy: #102c3e;
+  --shadow: 0 18px 50px rgba(19, 43, 60, 0.08);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --max-width: 1200px;
+  --font-display: Georgia, "Times New Roman", serif;
+}
