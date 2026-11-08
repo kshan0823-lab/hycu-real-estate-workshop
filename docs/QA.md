@@ -26,7 +26,7 @@
 | 도움말 대화상자 | PASS | 열기·ESC 닫기 확인 |
 | 앵커 이동 | PASS | 상단 메뉴와 섹션 ID 구성 확인 |
 | 타이머 미리보기 | PASS | 시작 후 시간이 줄고 멈춤·다시 시작 버튼 확인 |
-| 스크롤 안내 캐릭터 | PASS | 좌우 한순이·한돌이의 중앙 교차, 별·하트 효과, 위·아래 방향별 안내 문구 확인 |
+| 스크롤 안내 캐릭터 | PASS | 한순이 캐릭터의 위·아래 방향별 움직임과 안내 문구 확인 |
 | 선택 실습 펼치기 | PASS | 매물 사진 포토 앨범 카드 열림과 요청문 확인 |
 | 1440px 화면 | PASS | `docs/qa-screens/realestate-desktop-1440.png` 캡처 확인 |
 | 768px 화면 | PASS | `docs/qa-screens/realestate-tablet-768.png` 캡처 확인 |
